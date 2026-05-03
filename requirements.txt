@@ -1,0 +1,10 @@
+opencv-python
+numpy
+matplotlib
+seaborn
+scikit-learn
+torch
+torchmetrics
+albumentations
+tqdm
+xgboost
