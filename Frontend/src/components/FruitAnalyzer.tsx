@@ -107,16 +107,12 @@ export const FruitAnalyzer = () => {
       <div className="mx-auto max-w-5xl">
         {/* Header */}
         <header className="mb-12 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-medium text-blue-700 mb-6 shadow-sm">
-            <span>✨ Powered by AI Machine Learning</span>
-          </div>
+        
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
             Hệ thống Nhận diện <br />
             <span className="text-blue-600">Chất lượng Trái cây</span>
           </h1>
-          <p className="mt-4 text-base md:text-lg text-slate-600 max-w-xl mx-auto">
-            Tải ảnh lên và để các mô hình AI (Random Forest, XGBoost, ResNet) dự đoán loại quả và độ tươi ngon.
-          </p>
+         
         </header>
 
         <div className="grid gap-6 md:grid-cols-5">

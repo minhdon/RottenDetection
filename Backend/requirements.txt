@@ -4,3 +4,16 @@ pydantic
 sqlalchemy
 alembic
 pytest
+joblib
+opencv-python-headless
+numpy
+matplotlib
+seaborn
+scikit-learn
+torch
+torchvision
+torchmetrics
+albumentations
+tqdm
+xgboost
+python-multipart

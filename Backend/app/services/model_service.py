@@ -27,10 +27,7 @@ MODELS = {
 # --- CÁC HÀM TIỀN XỬ LÝ ---
 
 def extract_rgb_features(img_pil):
-    """
-    Hàm rút trích đặc trưng bằng Color Histogram (256 bins * 3 kênh = 768 features)
-    Đã được đồng bộ 100% với file huấn luyện.
-    """
+    
     # img_pil đã được convert("RGB") ở hàm gọi nó, nên mảng Numpy cũng chuẩn RGB
     img_np = np.array(img_pil)
     
@@ -51,7 +48,7 @@ def extract_rgb_features(img_pil):
     return np.array([feat_vector])
 
 def transform_for_resnet(img_pil):
-    """Tiền xử lý ảnh cho ResNet PyTorch"""
+   
     transform = transforms.Compose([
         transforms.Resize((224, 224)),
         transforms.ToTensor(),
@@ -63,7 +60,7 @@ def transform_for_resnet(img_pil):
 # --- HÀM LOAD TẤT CẢ MÔ HÌNH ---
 
 def load_all_models():
-    """Chạy 1 lần khi khởi động FastAPI"""
+    
     print("⏳ Đang nạp toàn bộ 6 mô hình vào bộ nhớ...")
     current_dir = pathlib.Path(__file__).resolve().parent
     models_dir = current_dir.parent / 'models'

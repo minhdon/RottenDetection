@@ -1,0 +1,58 @@
+services:
+  # ============================================================
+  # BACKEND - FastAPI (AI Models: RF, XGBoost, ResNet)
+  # ============================================================
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: cv_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8001"          # Truy cập trực tiếp API + Swagger docs
+    env_file:
+      - ./Backend/.env
+    environment:
+      - DATABASE_URL=sqlite:///./data/sql_app.db
+    volumes:
+      - backend_data:/app/data       # SQLite database
+      - ./FruitVision:/app/models:ro # Mount thư mục models (read-only)
+    networks:
+      - cv_network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s              # Cho thêm thời gian load 6 AI models
+
+  # ============================================================
+  # FRONTEND - React + Vite (build) → Nginx (serve)
+  # ============================================================
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: cv_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"              # Truy cập web tại http://localhost
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - cv_network
+
+# ============================================================
+# VOLUMES - Dữ liệu bền vững
+# ============================================================
+volumes:
+  backend_data:
+    driver: local
+
+# ============================================================
+# NETWORKS
+# ============================================================
+networks:
+  cv_network:
+    driver: bridge

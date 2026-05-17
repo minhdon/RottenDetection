@@ -8,3 +8,6 @@ torchmetrics
 albumentations
 tqdm
 xgboost
+joblib
+fastapi
+uvicorn
